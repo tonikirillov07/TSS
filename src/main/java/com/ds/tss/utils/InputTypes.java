@@ -1,4 +1,4 @@
-package com.ds.utilitiesapp.utils;
+package com.ds.tss.utils;
 
 public enum InputTypes {
     NUMERIC

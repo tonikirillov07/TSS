@@ -1,12 +1,10 @@
-package com.ds.utilitiesapp.records;
+package com.ds.tss.records;
 
-import com.ds.utilitiesapp.Constants;
-import com.ds.utilitiesapp.database.DatabaseService;
-import com.ds.utilitiesapp.database.tablesConstants.Agents;
-import com.ds.utilitiesapp.database.tablesConstants.Condoles;
-import com.ds.utilitiesapp.database.tablesConstants.Services;
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
-import com.ds.utilitiesapp.utils.settings.SettingsManager;
+import com.ds.tss.Constants;
+import com.ds.tss.database.DatabaseService;
+import com.ds.tss.database.tablesConstants.*;
+import com.ds.tss.dialogs.ErrorDialog;
+import com.ds.tss.utils.settings.SettingsManager;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.ds.utilitiesapp.database.DatabaseConstants.ID_ROW;
+import static com.ds.tss.database.DatabaseConstants.ID_ROW;
 
 public class RecordsGetter {
     @Contract(pure = true)
@@ -25,21 +23,19 @@ public class RecordsGetter {
         return "SELECT * FROM " + tableName + " ORDER BY " + ID_ROW + " ASC";
     }
 
-    public static @Nullable List<AgentRecord> getAllAgentRecords(){
+    public static @Nullable List<BranchRecord> getAllBranchesRecords(){
         try {
-            String selectAll = getSelectRequest(Agents.TABLE_NAME);
+            String selectAll = getSelectRequest(Branches.TABLE_NAME);
             PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(selectAll);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<AgentRecord> agentRecords = new ArrayList<>();
+            List<BranchRecord> branchesRecords = new ArrayList<>();
             while (resultSet.next()){
-                agentRecords.add(new AgentRecord(Agents.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW),
-                        resultSet.getString(Agents.NAME_ROW), resultSet.getString(Agents.SURNAME_ROW), resultSet.getString(Agents.ADDRESS_ROW), resultSet.getString(Agents.TELEPHONE_ROW),
-                        resultSet.getInt(Agents.PERSONAL_CODE_ROW), resultSet.getDouble(Agents.PAYMENTS_ROW)));
+                branchesRecords.add(new BranchRecord(Branches.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW), resultSet.getString(Branches.NAME_ROW), resultSet.getString(Branches.ADDRESS_ROW),
+                        resultSet.getString(Branches.TELEPHONE_ROW), resultSet.getString(Branches.WORK_CLOCKS_ROW), resultSet.getString(Branches.MANAGER_ROW)));
             }
 
-            return agentRecords;
-
+            return branchesRecords;
         }catch (Exception e){
             ErrorDialog.show(e);
         }
@@ -47,21 +43,38 @@ public class RecordsGetter {
         return null;
     }
 
-    public static @Nullable List<CondolesRecord> getAllCondolesRecords(){
+    public static @Nullable List<ClientRecord> getAllClientsRecords(){
         try {
-            String selectAll = getSelectRequest(Condoles.TABLE_NAME);
+            String selectAll = getSelectRequest(Clients.TABLE_NAME);
             PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(selectAll);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<CondolesRecord> condolesRecords = new ArrayList<>();
+            List<ClientRecord> clientsRecords = new ArrayList<>();
             while (resultSet.next()){
-                condolesRecords.add(new CondolesRecord(Condoles.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW),
-                        resultSet.getString(Condoles.OWNER_NAME_ROW), resultSet.getInt(Condoles.PEOPLE_NUMBER_ROW), resultSet.getInt(Condoles.ROOMS_NUMBER_ROW),
-                        resultSet.getInt(Condoles.NUMBER_ROW), resultSet.getDouble(Condoles.MAINTENANCE_AMOUNT_ROW), resultSet.getDouble(Condoles.SQUARE_ROW)));
+                clientsRecords.add(new ClientRecord(resultSet.getLong(ID_ROW), Clients.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getString(Clients.NAME_ROW),
+                        resultSet.getString(Clients.CONTACTS_DATA_ROW), resultSet.getString(Clients.CAR_NAME_ROW), resultSet.getString(Clients.CAR_NUMBER_ROW)));
+            }
+            return clientsRecords;
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+
+        return null;
+    }
+
+    public static @Nullable List<MaintainingRecord> getAllMaintainingRecords(){
+        try {
+            String selectAll = getSelectRequest(Maintaining.TABLE_NAME);
+            PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(selectAll);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<MaintainingRecord> maintainingRecords = new ArrayList<>();
+            while (resultSet.next()){
+                maintainingRecords.add(new MaintainingRecord(Maintaining.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW), resultSet.getString(Maintaining.DATE_ROW),
+                        resultSet.getString(Maintaining.CLIENT_ROW), resultSet.getString(Maintaining.AUTO_ROW), resultSet.getString(Maintaining.SERVICE_ROW), resultSet.getString(Maintaining.BRANCH_ROW), resultSet.getString(Maintaining.MECHANIC_ROW)));
             }
 
-            return condolesRecords;
-
+            return maintainingRecords;
         }catch (Exception e){
             ErrorDialog.show(e);
         }
@@ -75,14 +88,33 @@ public class RecordsGetter {
             PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(selectAll);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            List<ServicesRecord> servicesRecords = new ArrayList<>();
+            List<ServicesRecord> maintainingRecords = new ArrayList<>();
             while (resultSet.next()){
-                servicesRecords.add(new ServicesRecord(Services.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW),
-                        resultSet.getString(Services.NAME_ROW), resultSet.getString(Services.DATE_ROW), resultSet.getInt(Services.CONDOLE_NUMBER_ROW)));
+                maintainingRecords.add(new ServicesRecord(Services.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW), resultSet.getString(Services.NAME_ROW),
+                        resultSet.getString(Services.DESCRIPTION_ROW), resultSet.getString(Services.DURATION_ROW), resultSet.getDouble(Services.COST_ROW)));
             }
 
-            return servicesRecords;
+            return maintainingRecords;
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
 
+        return null;
+    }
+
+    public static @Nullable List<StaffRecord> getAllStaffsRecords(){
+        try {
+            String selectAll = getSelectRequest(Staff.TABLE_NAME);
+            PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(selectAll);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            List<StaffRecord> maintainingRecords = new ArrayList<>();
+            while (resultSet.next()){
+                maintainingRecords.add(new StaffRecord(Staff.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW), resultSet.getString(Staff.NAME_ROW), resultSet.getString(Staff.POST_ROW),
+                        resultSet.getString(Staff.BRANCH_ROW), resultSet.getString(Staff.CONTACTS_ROW), resultSet.getString(Staff.QUALIFICATION_ROW)));
+            }
+
+            return maintainingRecords;
         }catch (Exception e){
             ErrorDialog.show(e);
         }

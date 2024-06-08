@@ -2,6 +2,36 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/Test.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/MainController.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/database/DatabaseConstants.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/database/DatabaseService.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Branches.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Clients.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Services.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/dialogs/ErrorDialog.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/ExtendedTextField.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/SettingsOption.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/SettingsOptionButton.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/records/BranchRecord.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/records/ClientRecord.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/records/Record.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsGetter.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsWriter.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/records/ServicesRecord.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/utils/AnotherScenes.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/utils/InputTypes.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/utils/RecordsTypes.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/utils/actionListeners/IOnAction.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/utils/actionListeners/IOnTextTyping.java" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/ds/tss/utils/settings/SettingsManager.java" charset="windows-1252" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/ds/tss/add-data-view.fxml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/ds/tss/edit-data-view.fxml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/ds/tss/fonts" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/ds/tss/help-view.fxml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/ds/tss/images" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/ds/tss/main-view.fxml" charset="windows-1252" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/com/ds/tss/styles.css" charset="windows-1252" />
   </component>
 </project>

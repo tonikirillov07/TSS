@@ -1,4 +1,4 @@
-package com.ds.utilitiesapp.dialogs;
+package com.ds.tss.dialogs;
 
 import javafx.scene.control.Alert;
 import org.jetbrains.annotations.NotNull;

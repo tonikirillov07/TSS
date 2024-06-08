@@ -1,8 +1,9 @@
-package com.ds.utilitiesapp.database.tablesConstants;
+package com.ds.tss.database.tablesConstants;
 
 public final class Services {
     public static final String TABLE_NAME = "services";
     public static final String NAME_ROW = "name";
-    public static final String CONDOLE_NUMBER_ROW = "condole_number";
-    public static final String DATE_ROW = "date";
+    public static final String DESCRIPTION_ROW = "description";
+    public static final String DURATION_ROW = "duration";
+    public static final String COST_ROW = "cost";
 }

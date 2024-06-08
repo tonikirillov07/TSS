@@ -2,7 +2,7 @@ package com.ds.tss.records;
 
 import com.ds.tss.Constants;
 import com.ds.tss.database.DatabaseService;
-import com.ds.tss.database.tablesConstants.Condoles;
+import com.ds.tss.database.tablesConstants.Branches;
 import com.ds.tss.dialogs.ErrorDialog;
 import com.ds.tss.utils.settings.SettingsManager;
 
@@ -10,54 +10,43 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Objects;
 
-import static com.ds.tss.utils.Utils.convertRubToDollars;
+public class BranchRecord extends Record{
+    private String name, address, telephone, workClocks, manager;
 
-public class CondolesRecord extends Record{
-    private String ownerName;
-    private int peopleNumber, roomsNumber, number;
-    private double maintenanceAmount, square;
-
-    public CondolesRecord(){
+    public BranchRecord(){
         super(null, null);
-
     }
 
-    public CondolesRecord(String tableName, String databasePath, int number, String ownerName, int peopleNumber, int roomsNumber, double maintenanceAmount, double square) {
+    public BranchRecord(String tableName, String databasePath, String name, String address, String telephone, String workClocks, String manager) {
         super(tableName, databasePath);
-        this.number = number;
-        this.ownerName = ownerName;
-        this.peopleNumber = peopleNumber;
-        this.roomsNumber = roomsNumber;
-        this.maintenanceAmount = maintenanceAmount;
-        this.square = square;
+        this.name = name;
+        this.address = address;
+        this.telephone = telephone;
+        this.workClocks = workClocks;
+        this.manager = manager;
     }
 
-    public CondolesRecord(String tableName, String databasePath, long id, String ownerName, int peopleNumber, int roomsNumber, int number, double maintenanceAmount, double square) {
+    public BranchRecord(String tableName, String databasePath, long id, String name, String address, String telephone, String workClocks, String manager) {
         super(tableName, databasePath, id);
-        this.ownerName = ownerName;
-        this.peopleNumber = peopleNumber;
-        this.roomsNumber = roomsNumber;
-        this.number = number;
-        this.maintenanceAmount = maintenanceAmount;
-        this.square = square;
+        this.name = name;
+        this.address = address;
+        this.telephone = telephone;
+        this.workClocks = workClocks;
+        this.manager = manager;
     }
 
-    public int getNumber() {
-        return number;
-    }
-
-    public static boolean findCondoleWithNumber(int number){
+    public static boolean findBranchWithName(String name){
         try {
-            String select = "SELECT * FROM " + Condoles.TABLE_NAME + " WHERE " + Condoles.NUMBER_ROW + "=" + number;
+            String select = "SELECT * FROM " + Branches.TABLE_NAME + " WHERE " + Branches.NAME_ROW + "='" + name + "'";
             PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(select);
             ResultSet resultSet = preparedStatement.executeQuery();
 
-            boolean isThisCondoleExists = resultSet.next();
+            boolean isThisBranchExists = resultSet.next();
 
             resultSet.close();
             preparedStatement.close();
 
-            return isThisCondoleExists;
+            return isThisBranchExists;
         }catch (Exception e){
             ErrorDialog.show(e);
         }
@@ -65,61 +54,43 @@ public class CondolesRecord extends Record{
         return false;
     }
 
-    public double getSquare() {
-        return square;
+    public String getName() {
+        return name;
     }
 
-    public void setSquare(double square) {
-        this.square = square;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public String getAddress() {
+        return address;
     }
 
-    public String getOwnerName() {
-        return ownerName;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setOwnerName(String ownerName) {
-        this.ownerName = ownerName;
+    public String getTelephone() {
+        return telephone;
     }
 
-    public int getPeopleNumber() {
-        return peopleNumber;
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
     }
 
-    public void setPeopleNumber(int peopleNumber) {
-        this.peopleNumber = peopleNumber;
+    public String getWorkClocks() {
+        return workClocks;
     }
 
-    public int getRoomsNumber() {
-        return roomsNumber;
+    public void setWorkClocks(String workClocks) {
+        this.workClocks = workClocks;
     }
 
-    public void setRoomsNumber(int roomsNumber) {
-        this.roomsNumber = roomsNumber;
+    public String getManager() {
+        return manager;
     }
 
-    public double getMaintenanceAmount() {
-        return maintenanceAmount;
-    }
-
-    public double getMaintenanceAmountInDollars() {
-        return convertRubToDollars(getMaintenanceAmount());
-    }
-
-    public void setMaintenanceAmount(double maintenanceAmount) {
-        this.maintenanceAmount = maintenanceAmount;
-    }
-
-    @Override
-    public String toString() {
-        return "CondolesRecord{" +
-                "ownerName='" + ownerName + '\'' +
-                ", peopleNumber=" + peopleNumber +
-                ", roomsNumber=" + roomsNumber +
-                ", number=" + number +
-                '}';
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 }

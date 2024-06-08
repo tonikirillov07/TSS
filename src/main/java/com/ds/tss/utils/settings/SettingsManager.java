@@ -1,9 +1,10 @@
-package com.ds.utilitiesapp.utils.settings;
+package com.ds.tss.utils.settings;
 
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
+import com.ds.tss.dialogs.ErrorDialog;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.*;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.util.Properties;
 
 public class SettingsManager {

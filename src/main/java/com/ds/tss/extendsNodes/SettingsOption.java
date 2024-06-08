@@ -1,8 +1,8 @@
-package com.ds.utilitiesapp.extendsNodes;
+package com.ds.tss.extendsNodes;
 
-import com.ds.utilitiesapp.Constants;
-import com.ds.utilitiesapp.Main;
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
+import com.ds.tss.Constants;
+import com.ds.tss.Main;
+import com.ds.tss.dialogs.ErrorDialog;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;

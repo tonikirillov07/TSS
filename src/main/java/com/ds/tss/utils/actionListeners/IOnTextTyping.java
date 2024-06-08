@@ -1,4 +1,4 @@
-package com.ds.utilitiesapp.utils.actionListeners;
+package com.ds.tss.utils.actionListeners;
 
 public interface IOnTextTyping {
     void onTextTyping(String text);

@@ -1,15 +1,16 @@
-package com.ds.utilitiesapp.controllers;
+package com.ds.tss.controllers;
 
-import com.ds.utilitiesapp.MainPage;
-import com.ds.utilitiesapp.utils.Utils;
+import com.ds.tss.MainPage;
+import com.ds.tss.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.VBox;
 
-import static com.ds.utilitiesapp.Constants.WINDOW_HEIGHT;
-import static com.ds.utilitiesapp.Constants.WINDOW_WIDTH;
+import static com.ds.tss.Constants.WINDOW_HEIGHT;
+import static com.ds.tss.Constants.WINDOW_WIDTH;
+
 
 public class MainController {
     @FXML

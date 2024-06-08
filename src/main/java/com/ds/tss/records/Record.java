@@ -1,4 +1,4 @@
-package com.ds.utilitiesapp.records;
+package com.ds.tss.records;
 
 public abstract class Record {
     private final String tableName;

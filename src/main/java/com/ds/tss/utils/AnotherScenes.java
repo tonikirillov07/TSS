@@ -1,8 +1,7 @@
-package com.ds.utilitiesapp.utils;
+package com.ds.tss.utils;
 
-import com.ds.utilitiesapp.Main;
-import com.ds.utilitiesapp.MainPage;
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
+import com.ds.tss.Main;
+import com.ds.tss.dialogs.ErrorDialog;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

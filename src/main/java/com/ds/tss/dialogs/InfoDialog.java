@@ -1,6 +1,6 @@
-package com.ds.utilitiesapp.dialogs;
+package com.ds.tss.dialogs;
 
-import com.ds.utilitiesapp.utils.Utils;
+import com.ds.tss.utils.Utils;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 

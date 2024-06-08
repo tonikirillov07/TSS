@@ -1,6 +1,6 @@
-package com.ds.utilitiesapp;
+package com.ds.tss;
 
-import com.ds.utilitiesapp.utils.Utils;
+import com.ds.tss.utils.Utils;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import javax.swing.*;
 import java.util.Objects;
 
-import static com.ds.utilitiesapp.Constants.*;
+import static com.ds.tss.Constants.*;
 
 public class Main extends Application {
     @Override
@@ -28,6 +28,7 @@ public class Main extends Application {
             stage.setOnCloseRequest(windowEvent -> close(stage));
             stage.show();
         }catch (Exception e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(null, e.toString(), "An exception has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }

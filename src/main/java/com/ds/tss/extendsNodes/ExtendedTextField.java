@@ -1,10 +1,10 @@
-package com.ds.utilitiesapp.extendsNodes;
+package com.ds.tss.extendsNodes;
 
-import com.ds.utilitiesapp.Constants;
-import com.ds.utilitiesapp.Main;
-import com.ds.utilitiesapp.utils.InputTypes;
-import com.ds.utilitiesapp.utils.actionListeners.IOnAction;
-import com.ds.utilitiesapp.utils.actionListeners.IOnTextTyping;
+import com.ds.tss.Constants;
+import com.ds.tss.Main;
+import com.ds.tss.utils.InputTypes;
+import com.ds.tss.utils.actionListeners.IOnAction;
+import com.ds.tss.utils.actionListeners.IOnTextTyping;
 import javafx.animation.TranslateTransition;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

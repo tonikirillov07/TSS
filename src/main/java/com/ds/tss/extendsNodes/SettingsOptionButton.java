@@ -1,8 +1,8 @@
-package com.ds.utilitiesapp.extendsNodes;
+package com.ds.tss.extendsNodes;
 
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
-import com.ds.utilitiesapp.utils.Utils;
-import com.ds.utilitiesapp.utils.actionListeners.IOnAction;
+import com.ds.tss.dialogs.ErrorDialog;
+import com.ds.tss.utils.Utils;
+import com.ds.tss.utils.actionListeners.IOnAction;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.effect.DropShadow;

@@ -1,16 +1,14 @@
-package com.ds.utilitiesapp;
+package com.ds.tss;
 
-import com.ds.utilitiesapp.controllers.AddDataController;
-import com.ds.utilitiesapp.controllers.EditDataController;
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
-import com.ds.utilitiesapp.records.*;
-import com.ds.utilitiesapp.records.Record;
-import com.ds.utilitiesapp.utils.AnotherScenes;
-import com.ds.utilitiesapp.utils.RecordsTypes;
-import com.ds.utilitiesapp.utils.Utils;
-import com.ds.utilitiesapp.utils.settings.SettingsManager;
+import com.ds.tss.controllers.AddDataController;
+import com.ds.tss.controllers.EditDataController;
+import com.ds.tss.dialogs.ErrorDialog;
+import com.ds.tss.records.*;
+import com.ds.tss.utils.AnotherScenes;
+import com.ds.tss.utils.RecordsTypes;
+import com.ds.tss.utils.Utils;
+import com.ds.tss.utils.settings.SettingsManager;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -28,9 +26,9 @@ import java.io.File;
 import java.util.List;
 import java.util.Objects;
 
-import static com.ds.utilitiesapp.Constants.CURRENT_DATABASE_FILE_KEY;
-import static com.ds.utilitiesapp.Constants.TEMPORARY_DATABASE;
-import static com.ds.utilitiesapp.utils.Utils.*;
+import static com.ds.tss.Constants.CURRENT_DATABASE_FILE_KEY;
+import static com.ds.tss.Constants.TEMPORARY_DATABASE;
+import static com.ds.tss.utils.Utils.*;
 
 public class MainPage {
     private final Label categoryLabel;
@@ -61,40 +59,140 @@ public class MainPage {
 
     private void initCategoryMenuButton() {
         try {
-            MenuItem menuItemCondos = new MenuItem("Квартиры");
+            MenuItem menuItemBranches = new MenuItem("Филиалы");
             MenuItem menuItemServices = new MenuItem("Услуги");
-            MenuItem menuItemAgents = new MenuItem("Агенты");
+            MenuItem menuItemClients = new MenuItem("Клиенты");
+            MenuItem menuItemMaintainingRecords = new MenuItem("Записи на обслуживание");
+            MenuItem menuItemStaffs = new MenuItem("Сотрудники");
 
-            menuItemCondos.setOnAction(actionEvent -> {
-                displayCondoles();
-                defaultCategoryMenuItemsAction(menuItemCondos, categoryMenuButton);
+            menuItemBranches.setOnAction(actionEvent -> {
+                displayBranches();
+                defaultCategoryMenuItemsAction(menuItemBranches, categoryMenuButton);
             });
-            menuItemAgents.setOnAction(actionEvent -> {
-                displayAgents();
-                defaultCategoryMenuItemsAction(menuItemAgents, categoryMenuButton);
+            menuItemClients.setOnAction(actionEvent -> {
+                displayClients();
+                defaultCategoryMenuItemsAction(menuItemClients, categoryMenuButton);
             });
             menuItemServices.setOnAction(actionEvent -> {
                 displayServices();
                 defaultCategoryMenuItemsAction(menuItemServices, categoryMenuButton);
             });
+            menuItemMaintainingRecords.setOnAction(actionEvent -> {
+                displayMaintaining();
+                defaultCategoryMenuItemsAction(menuItemMaintainingRecords, categoryMenuButton);
+            });
+            menuItemStaffs.setOnAction(actionEvent -> {
+                displayStaffs();
+                defaultCategoryMenuItemsAction(menuItemStaffs, categoryMenuButton);
+            });
 
             categoryMenuButton.setText("Выбор");
             categoryMenuButton.setFont(Font.loadFont(Main.class.getResourceAsStream(Constants.INTER_BOLD_ITALIC_FONT_INPUT_PATH), 14d));
             categoryMenuButton.getItems().clear();
-            categoryMenuButton.getItems().addAll(menuItemCondos, menuItemServices, menuItemAgents);
+            categoryMenuButton.getItems().addAll(menuItemBranches, menuItemServices, menuItemClients, menuItemMaintainingRecords, menuItemStaffs);
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+    }
+
+    private void displayStaffs() {
+        try{
+            currentRecordType = RecordsTypes.STAFF;
+
+            TableView<StaffRecord> tableView = new TableView<>();
+            applySettingForTableView(tableView);
+
+            TableColumn<StaffRecord, Long> staffRecordIdTableColumn = new TableColumn<>("ID");
+            staffRecordIdTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
+
+            TableColumn<StaffRecord, String> staffRecordNameTableColumn = new TableColumn<>("Имя");
+            staffRecordNameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
+
+            TableColumn<StaffRecord, String> staffRecordPostTableColumn = new TableColumn<>("Должность");
+            staffRecordPostTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getPost()));
+
+            TableColumn<StaffRecord, String> staffRecordBranchTableColumn = new TableColumn<>("Филиал");
+            staffRecordBranchTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBranch()));
+
+            TableColumn<StaffRecord, String> staffRecordContactsTableColumn = new TableColumn<>("Контакты");
+            staffRecordContactsTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContacts()));
+
+            TableColumn<StaffRecord, String> staffRecordQualificationTableColumn = new TableColumn<>("Квалификация");
+            staffRecordQualificationTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQualification()));
+
+            tableView.getColumns().addAll(staffRecordIdTableColumn, staffRecordNameTableColumn, staffRecordPostTableColumn, staffRecordBranchTableColumn,
+                    staffRecordContactsTableColumn, staffRecordQualificationTableColumn);
+            tableView.setOnMouseClicked(mouseEvent -> {
+                int cellIndex = getSelectedRowIndexFromTableView(tableView);
+                if(cellIndex < 0)
+                    return;
+
+                StaffRecord servicesRecord = tableView.getItems().get(cellIndex);
+                openEditingScene(servicesRecord, RecordsTypes.STAFF);
+            });
+            tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllStaffsRecords()));
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+    }
+
+    private void displayMaintaining() {
+        try{
+            currentRecordType = RecordsTypes.MAINTAINING;
+
+            TableView<MaintainingRecord> tableView = new TableView<>();
+            applySettingForTableView(tableView);
+
+            TableColumn<MaintainingRecord, Long> maintainingRecordIdTableColumn = new TableColumn<>("ID");
+            maintainingRecordIdTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
+
+            TableColumn<MaintainingRecord, String> maintainingRecordDateTableColumn = new TableColumn<>("Дата");
+            maintainingRecordDateTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
+
+            TableColumn<MaintainingRecord, String> maintainingRecordClientTableColumn = new TableColumn<>("Клиент");
+            maintainingRecordClientTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getClient()));
+
+            TableColumn<MaintainingRecord, String> maintainingRecordAutoTableColumn = new TableColumn<>("Машина");
+            maintainingRecordAutoTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAuto()));
+
+            TableColumn<MaintainingRecord, String> maintainingRecordServiceTableColumn = new TableColumn<>("Услуга");
+            maintainingRecordServiceTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getService()));
+
+            TableColumn<MaintainingRecord, String> maintainingRecordBranchTableColumn = new TableColumn<>("Филиал");
+            maintainingRecordBranchTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getBranch()));
+
+            TableColumn<MaintainingRecord, String> maintainingRecordMechanicTableColumn = new TableColumn<>("Механик");
+            maintainingRecordMechanicTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getMechanic()));
+
+            tableView.getColumns().addAll(maintainingRecordIdTableColumn, maintainingRecordDateTableColumn, maintainingRecordClientTableColumn, maintainingRecordAutoTableColumn,
+                    maintainingRecordServiceTableColumn, maintainingRecordBranchTableColumn, maintainingRecordMechanicTableColumn);
+            tableView.setOnMouseClicked(mouseEvent -> {
+                int cellIndex = getSelectedRowIndexFromTableView(tableView);
+                if(cellIndex < 0)
+                    return;
+
+                MaintainingRecord servicesRecord = tableView.getItems().get(cellIndex);
+                openEditingScene(servicesRecord, RecordsTypes.MAINTAINING);
+            });
+            tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllMaintainingRecords()));
         }catch (Exception e){
             ErrorDialog.show(e);
         }
     }
 
     private void applySettingForTableView(@NotNull TableView tableView){
-        mainVbox.getChildren().removeIf(predicate -> predicate instanceof TableView);
+        try {
+            mainVbox.getChildren().removeIf(predicate -> predicate instanceof TableView);
 
-        tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        VBox.setVgrow(tableView, Priority.ALWAYS);
-        VBox.setMargin(tableView, new Insets(15));
+            tableView.setOpacity(0.76d);
+            tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+            VBox.setVgrow(tableView, Priority.ALWAYS);
+            VBox.setMargin(tableView, new Insets(15));
 
-        mainVbox.getChildren().add(tableView);
+            mainVbox.getChildren().add(tableView);
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
     }
 
     private void displayServices(){
@@ -110,13 +208,16 @@ public class MainPage {
             TableColumn<ServicesRecord, String> servicesRecordNameTableColumn = new TableColumn<>("Название услуги");
             servicesRecordNameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
-            TableColumn<ServicesRecord, Integer> servicesRecordCondoleNumberTableColumn = new TableColumn<>("Номер квартиры");
-            servicesRecordCondoleNumberTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getCondoleNumber()));
+            TableColumn<ServicesRecord, String> servicesRecordDescriptionTableColumn = new TableColumn<>("Описание");
+            servicesRecordDescriptionTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDescription()));
 
-            TableColumn<ServicesRecord, String> servicesRecordDateTableColumn = new TableColumn<>("Дата услуги");
-            servicesRecordDateTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDate()));
+            TableColumn<ServicesRecord, String> servicesRecordDurationTableColumn = new TableColumn<>("Продолжительность");
+            servicesRecordDurationTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getDuration()));
 
-            tableView.getColumns().addAll(servicesRecordIdTableColumn, servicesRecordNameTableColumn, servicesRecordCondoleNumberTableColumn, servicesRecordDateTableColumn);
+            TableColumn<ServicesRecord, Double> servicesRecordCostTableColumn = new TableColumn<>("Цена");
+            servicesRecordCostTableColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getCost()).asObject());
+
+            tableView.getColumns().addAll(servicesRecordIdTableColumn, servicesRecordNameTableColumn, servicesRecordDescriptionTableColumn, servicesRecordDurationTableColumn, servicesRecordCostTableColumn);
             tableView.setOnMouseClicked(mouseEvent -> {
                 int cellIndex = getSelectedRowIndexFromTableView(tableView);
                 if(cellIndex < 0)
@@ -131,46 +232,43 @@ public class MainPage {
         }
     }
 
-    private void displayCondoles(){
+    private void displayBranches(){
         try{
-            currentRecordType = RecordsTypes.CONDOLE;
+            currentRecordType = RecordsTypes.BRANCH;
 
-            TableView<CondolesRecord> tableView = new TableView<>();
+            TableView<BranchRecord> tableView = new TableView<>();
             applySettingForTableView(tableView);
 
-            TableColumn<CondolesRecord, Long> condolesRecordIdTableColumn = new TableColumn<>("ID");
-            condolesRecordIdTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
+            TableColumn<BranchRecord, Long> branchesRecordIdTableColumn = new TableColumn<>("ID");
+            branchesRecordIdTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
 
-            TableColumn<CondolesRecord, Integer> condolesRecordNumberTableColumn = new TableColumn<>("Номер квартиры");
-            condolesRecordNumberTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNumber()));
+            TableColumn<BranchRecord, String> branchesRecordNameTableColumn = new TableColumn<>("Название");
+            branchesRecordNameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
-            TableColumn<CondolesRecord, String> condolesRecordOwnerNameTableColumn = new TableColumn<>("Имя владельца");
-            condolesRecordOwnerNameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getOwnerName()));
+            TableColumn<BranchRecord, String> branchesRecordAddressTableColumn = new TableColumn<>("Адрес");
+            branchesRecordAddressTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));
 
-            TableColumn<CondolesRecord, Integer> condolesRecordRoomsNumberTableColumn = new TableColumn<>("Количество комнат");
-            condolesRecordRoomsNumberTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getRoomsNumber()));
+            TableColumn<BranchRecord, String> branchesRecordTelephoneTableColumn = new TableColumn<>("Телефон");
+            branchesRecordTelephoneTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelephone()));
 
-            TableColumn<CondolesRecord, Integer> condolesRecordPeopleNumberTableColumn = new TableColumn<>("Количество жильцов");
-            condolesRecordPeopleNumberTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getPeopleNumber()));
+            TableColumn<BranchRecord, String> branchesRecordWorkClocksTableColumn = new TableColumn<>("Часы работы");
+            branchesRecordWorkClocksTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getWorkClocks()));
 
-            TableColumn<CondolesRecord, Double> condolesRecordSquareTableColumn = new TableColumn<>("Площадь");
-            condolesRecordSquareTableColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSquare()).asObject());
+            TableColumn<BranchRecord, String> branchesRecordManagerTableColumn = new TableColumn<>("Менеджер");
+            branchesRecordManagerTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getManager()));
 
-            TableColumn<CondolesRecord, Double> condolesRecordMaintenanceAmountTableColumn = new TableColumn<>("Сумма за содержание");
-            condolesRecordMaintenanceAmountTableColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getMaintenanceAmount()).asObject());
-
-            tableView.getColumns().addAll(condolesRecordIdTableColumn, condolesRecordNumberTableColumn, condolesRecordOwnerNameTableColumn, condolesRecordRoomsNumberTableColumn,
-                    condolesRecordPeopleNumberTableColumn, condolesRecordSquareTableColumn, condolesRecordMaintenanceAmountTableColumn);
+            tableView.getColumns().addAll(branchesRecordIdTableColumn, branchesRecordNameTableColumn, branchesRecordAddressTableColumn, branchesRecordTelephoneTableColumn,
+                    branchesRecordWorkClocksTableColumn, branchesRecordManagerTableColumn);
             tableView.setOnMouseClicked(mouseEvent -> {
                 int cellIndex = getSelectedRowIndexFromTableView(tableView);
                 if(cellIndex < 0)
                     return;
 
-                CondolesRecord data = tableView.getItems().get(cellIndex);
-                openEditingScene(data, RecordsTypes.CONDOLE);
+                BranchRecord data = tableView.getItems().get(cellIndex);
+                openEditingScene(data, RecordsTypes.BRANCH);
             });
 
-            tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllCondolesRecords()));
+            tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllBranchesRecords()));
         }catch (Exception e){
             ErrorDialog.show(e);
         }
@@ -191,45 +289,38 @@ public class MainPage {
         return -1;
     }
 
-    private void displayAgents(){
+    private void displayClients(){
         try {
-            currentRecordType = RecordsTypes.AGENT;
+            currentRecordType = RecordsTypes.CLIENT;
 
-            TableView<AgentRecord> tableView = new TableView<>();
+            TableView<ClientRecord> tableView = new TableView<>();
             applySettingForTableView(tableView);
 
-            TableColumn<AgentRecord, Long> agentRecordIdTableColumn = new TableColumn<>("ID");
+            TableColumn<ClientRecord, Long> agentRecordIdTableColumn = new TableColumn<>("ID");
             agentRecordIdTableColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getId()));
 
-            TableColumn<AgentRecord, String> agentRecordNameTableColumn = new TableColumn<>("Имя");
+            TableColumn<ClientRecord, String> agentRecordNameTableColumn = new TableColumn<>("Имя");
             agentRecordNameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getName()));
 
-            TableColumn<AgentRecord, String> agentRecordSurnameTableColumn = new TableColumn<>("Фамилия");
-            agentRecordSurnameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSurname()));
+            TableColumn<ClientRecord, String> agentRecordCarNameTableColumn = new TableColumn<>("Машина");
+            agentRecordCarNameTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCarName()));
 
-            TableColumn<AgentRecord, Integer> agentRecordPersonalCodeTableColumn = new TableColumn<>("Персональный код");
-            agentRecordPersonalCodeTableColumn.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getValue().getPersonalCode()).asObject());
+            TableColumn<ClientRecord, String> agentRecordCarCodeTableColumn = new TableColumn<>("Номер машины");
+            agentRecordCarCodeTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCarNumber()));
 
-            TableColumn<AgentRecord, String> agentRecordAddressTableColumn = new TableColumn<>("Адрес");
-            agentRecordAddressTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAddress()));
+            TableColumn<ClientRecord, String> agentRecordContactsTableColumn = new TableColumn<>("Контакты");
+            agentRecordContactsTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getContacts()));
 
-            TableColumn<AgentRecord, String> agentRecordTelephoneTableColumn = new TableColumn<>("Телефон");
-            agentRecordTelephoneTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTelephone()));
-
-            TableColumn<AgentRecord, Double> agentRecordPaymentsTableColumn = new TableColumn<>("Выплаты");
-            agentRecordPaymentsTableColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getPayments()).asObject());
-
-            tableView.getColumns().addAll(agentRecordIdTableColumn, agentRecordNameTableColumn, agentRecordSurnameTableColumn, agentRecordPersonalCodeTableColumn, agentRecordAddressTableColumn,
-                    agentRecordTelephoneTableColumn, agentRecordPaymentsTableColumn);
+            tableView.getColumns().addAll(agentRecordIdTableColumn, agentRecordNameTableColumn, agentRecordCarNameTableColumn, agentRecordCarCodeTableColumn, agentRecordContactsTableColumn);
             tableView.setOnMouseClicked(mouseEvent -> {
                 int cellIndex = getSelectedRowIndexFromTableView(tableView);
                 if(cellIndex < 0)
                     return;
 
-                AgentRecord condolesRecord = tableView.getItems().get(cellIndex);
-                openEditingScene(condolesRecord, RecordsTypes.AGENT);
+                ClientRecord condolesRecord = tableView.getItems().get(cellIndex);
+                openEditingScene(condolesRecord, RecordsTypes.CLIENT);
             });
-            tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllAgentRecords()));
+            tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllClientsRecords()));
         }catch (Exception e){
             ErrorDialog.show(e);
         }
@@ -303,9 +394,11 @@ public class MainPage {
             return;
 
         switch (currentRecordType){
-            case CONDOLE -> displayCondoles();
-            case AGENT -> displayAgents();
+            case BRANCH -> displayBranches();
+            case CLIENT -> displayClients();
             case SERVICE -> displayServices();
+            case STAFF -> displayStaffs();
+            case MAINTAINING -> displayMaintaining();
         }
     }
 
@@ -316,16 +409,18 @@ public class MainPage {
         }
     }
 
-    private void openEditingScene(Record record, @NotNull RecordsTypes recordsTypes){
+    private void openEditingScene(com.ds.tss.records.Record record, @NotNull RecordsTypes recordsTypes){
         EditDataController editDataController = (EditDataController) AnotherScenes.goToAnotherScene("edit-data-view.fxml", "Редактирование данных");
 
         assert editDataController != null;
         editDataController.setOnClose(this::update);
 
         switch (recordsTypes){
-            case AGENT -> editDataController.loadAgent((AgentRecord) record);
-            case CONDOLE -> editDataController.loadCondole((CondolesRecord) record);
+            case CLIENT -> editDataController.loadClient((ClientRecord) record);
+            case BRANCH -> editDataController.loadBranch((BranchRecord) record);
             case SERVICE -> editDataController.loadService((ServicesRecord) record);
+            case STAFF -> editDataController.loadStaff((StaffRecord) record);
+            case MAINTAINING -> editDataController.loadMaintaining((MaintainingRecord) record);
         }
     }
 

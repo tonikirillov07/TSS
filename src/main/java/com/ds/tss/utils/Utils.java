@@ -1,12 +1,12 @@
-package com.ds.utilitiesapp.utils;
+package com.ds.tss.utils;
 
-import com.ds.utilitiesapp.Constants;
-import com.ds.utilitiesapp.Main;
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
-import com.ds.utilitiesapp.dialogs.InfoDialog;
-import com.ds.utilitiesapp.extendsNodes.ExtendedTextField;
-import com.ds.utilitiesapp.utils.actionListeners.IOnAction;
-import com.ds.utilitiesapp.utils.settings.SettingsManager;
+import com.ds.tss.Constants;
+import com.ds.tss.Main;
+import com.ds.tss.dialogs.ErrorDialog;
+import com.ds.tss.dialogs.InfoDialog;
+import com.ds.tss.extendsNodes.ExtendedTextField;
+import com.ds.tss.utils.actionListeners.IOnAction;
+import com.ds.tss.utils.settings.SettingsManager;
 import javafx.scene.Node;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
@@ -29,7 +29,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-import static com.ds.utilitiesapp.Constants.*;
+import static com.ds.tss.Constants.ONE_DOLLAR;
 
 public final class Utils {
     public static void copyString(String string){

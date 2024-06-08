@@ -1,6 +1,6 @@
-package com.ds.utilitiesapp.database;
+package com.ds.tss.database;
 
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
+import com.ds.tss.dialogs.ErrorDialog;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -10,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Objects;
 
-import static com.ds.utilitiesapp.database.DatabaseConstants.ID_ROW;
+import static com.ds.tss.database.DatabaseConstants.ID_ROW;
 
 public class DatabaseService {
     public static @Nullable Connection getConnection(String databasePath){

@@ -1,27 +1,25 @@
-package com.ds.utilitiesapp.controllers;
+package com.ds.tss.controllers;
 
-import com.ds.utilitiesapp.Constants;
-import com.ds.utilitiesapp.MainPage;
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
-import com.ds.utilitiesapp.dialogs.InfoDialog;
-import com.ds.utilitiesapp.extendsNodes.SettingsOption;
-import com.ds.utilitiesapp.extendsNodes.SettingsOptionButton;
-import com.ds.utilitiesapp.utils.Utils;
+import com.ds.tss.Constants;
+import com.ds.tss.MainPage;
+import com.ds.tss.dialogs.ErrorDialog;
+import com.ds.tss.dialogs.InfoDialog;
+import com.ds.tss.extendsNodes.SettingsOption;
+import com.ds.tss.extendsNodes.SettingsOptionButton;
+import com.ds.tss.utils.Utils;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
 
 import java.awt.*;
 import java.net.URI;
-import java.util.Objects;
 
-import static com.ds.utilitiesapp.extendsNodes.SettingsOptionButton.DEFAULT_IMAGE_FIT_HEIGHT;
-import static com.ds.utilitiesapp.extendsNodes.SettingsOptionButton.DEFAULT_IMAGE_FIT_WIDTH;
-import static com.ds.utilitiesapp.utils.Utils.copyString;
+import static com.ds.tss.extendsNodes.SettingsOptionButton.DEFAULT_IMAGE_FIT_HEIGHT;
+import static com.ds.tss.extendsNodes.SettingsOptionButton.DEFAULT_IMAGE_FIT_WIDTH;
+import static com.ds.tss.utils.Utils.copyString;
 
 public class ContactsController {
     @FXML

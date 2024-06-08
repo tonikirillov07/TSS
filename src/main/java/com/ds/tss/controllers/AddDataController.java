@@ -1,17 +1,15 @@
-package com.ds.utilitiesapp.controllers;
+package com.ds.tss.controllers;
 
-import com.ds.utilitiesapp.Constants;
-import com.ds.utilitiesapp.MainPage;
-import com.ds.utilitiesapp.database.tablesConstants.Agents;
-import com.ds.utilitiesapp.database.tablesConstants.Condoles;
-import com.ds.utilitiesapp.database.tablesConstants.Services;
-import com.ds.utilitiesapp.dialogs.ErrorDialog;
-import com.ds.utilitiesapp.extendsNodes.ExtendedTextField;
-import com.ds.utilitiesapp.records.*;
-import com.ds.utilitiesapp.utils.InputTypes;
-import com.ds.utilitiesapp.utils.Utils;
-import com.ds.utilitiesapp.utils.actionListeners.IOnAction;
-import com.ds.utilitiesapp.utils.settings.SettingsManager;
+import com.ds.tss.Constants;
+import com.ds.tss.MainPage;
+import com.ds.tss.database.tablesConstants.*;
+import com.ds.tss.dialogs.ErrorDialog;
+import com.ds.tss.extendsNodes.ExtendedTextField;
+import com.ds.tss.records.*;
+import com.ds.tss.utils.InputTypes;
+import com.ds.tss.utils.Utils;
+import com.ds.tss.utils.actionListeners.IOnAction;
+import com.ds.tss.utils.settings.SettingsManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -23,9 +21,8 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import static com.ds.utilitiesapp.Constants.*;
-import static com.ds.utilitiesapp.utils.Utils.checkPhoneNumber;
-import static com.ds.utilitiesapp.utils.Utils.defaultCategoryMenuItemsAction;
+import static com.ds.tss.Constants.*;
+import static com.ds.tss.utils.Utils.defaultCategoryMenuItemsAction;
 
 public class AddDataController {
     @FXML
@@ -51,63 +48,78 @@ public class AddDataController {
 
     private void initCategoryMenuButton() {
         try {
-            MenuItem menuItemAgents = new MenuItem("Агенты");
-            MenuItem menuItemCondoles = new MenuItem("Квартиры");
+            MenuItem menuItemClients = new MenuItem("Клиенты");
+            MenuItem menuItemBranches = new MenuItem("Филиалы");
             MenuItem menuItemServices = new MenuItem("Услуги");
+            MenuItem menuItemMaintaining = new MenuItem("Записи на обслуживание");
+            MenuItem menuItemStaffs = new MenuItem("Сотрудники");
 
-            menuItemAgents.setOnAction(actionEvent -> {
-                defaultCategoryMenuItemsAction(menuItemAgents, categoryMenuButton);
-                loadAgentComponents();
+            menuItemClients.setOnAction(actionEvent -> {
+                defaultCategoryMenuItemsAction(menuItemClients, categoryMenuButton);
+                loadClientsComponents();
             });
-            menuItemCondoles.setOnAction(actionEvent -> {
-                defaultCategoryMenuItemsAction(menuItemCondoles, categoryMenuButton);
-                loadCondolesComponents();
+            menuItemBranches.setOnAction(actionEvent -> {
+                defaultCategoryMenuItemsAction(menuItemBranches, categoryMenuButton);
+                loadBranchesComponents();
             });
             menuItemServices.setOnAction(actionEvent -> {
                 defaultCategoryMenuItemsAction(menuItemServices, categoryMenuButton);
                 loadServicesComponents();
             });
+            menuItemMaintaining.setOnAction(actionEvent -> {
+                defaultCategoryMenuItemsAction(menuItemMaintaining, categoryMenuButton);
+                loadMaintainingComponents();
+            });
+            menuItemStaffs.setOnAction(actionEvent -> {
+                defaultCategoryMenuItemsAction(menuItemStaffs, categoryMenuButton);
+                loadStaffComponents();
+            });
 
             categoryMenuButton.setText("Выбор");
             categoryMenuButton.setFont(Font.loadFont(MainPage.class.getResourceAsStream(Constants.INTER_BOLD_ITALIC_FONT_INPUT_PATH), 14d));
-            categoryMenuButton.getItems().addAll(menuItemAgents, menuItemCondoles, menuItemServices);
+            categoryMenuButton.getItems().addAll(menuItemClients, menuItemBranches, menuItemServices, menuItemMaintaining, menuItemStaffs);
         }catch (Exception e){
             ErrorDialog.show(e);
         }
     }
 
-    private void loadAgentComponents() {
+    private void loadMaintainingComponents() {
         try {
             clearContentVBox();
 
-            ExtendedTextField extendedTextFieldName = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Имя агента", Utils.getImage("images/user.png"));
-            ExtendedTextField extendedTextFieldSurname = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Фамилия агента", Utils.getImage("images/user.png"));
-            ExtendedTextField extendedTextFieldPersonalCode = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Персональный код", Utils.getImage("images/digits.png"));
-            ExtendedTextField extendedTextFieldAddress = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Адрес проживания", Utils.getImage("images/all_symbols.png"));
-            ExtendedTextField extendedTextFieldTelephone = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Телефон", Utils.getImage("images/telephone.png"));
-            ExtendedTextField extendedTextFieldPayments = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Ежемесячные выплаты (руб.)", Utils.getImage("images/payments.png"));
+            ExtendedTextField extendedTextFieldDate = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Дата", Utils.getImage("images/date.png"));
+            ExtendedTextField extendedTextFieldClient = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Клиент", Utils.getImage("images/user.png"));
+            ExtendedTextField extendedTextFieldAuto = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Авто", Utils.getImage("images/car.png"));
+            ExtendedTextField extendedTextFieldService = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Услуга", Utils.getImage("images/service.png"));
+            ExtendedTextField extendedTextFieldBranch = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Филиал", Utils.getImage("images/all_symbols.png"));
+            ExtendedTextField extendedTextFieldMechanic = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Механик", Utils.getImage("images/mechanic.png"));
 
-            extendedTextFieldPersonalCode.setInputType(InputTypes.NUMERIC);
-
-            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldSurname, extendedTextFieldPersonalCode, extendedTextFieldAddress, extendedTextFieldTelephone, extendedTextFieldPayments);
+            contentVbox.getChildren().addAll(extendedTextFieldDate, extendedTextFieldClient, extendedTextFieldAuto, extendedTextFieldService, extendedTextFieldBranch, extendedTextFieldMechanic);
             nextButton.setOnAction(actionEvent -> {
                 try {
-                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldSurname, extendedTextFieldPersonalCode, extendedTextFieldAddress, extendedTextFieldTelephone, extendedTextFieldPayments});
+                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldDate, extendedTextFieldClient, extendedTextFieldAuto, extendedTextFieldService, extendedTextFieldBranch, extendedTextFieldMechanic});
                     emptyFields.forEach(ExtendedTextField::setError);
 
                     if (!emptyFields.isEmpty())
                         return;
 
-                    if (AgentRecord.findAgentWithPersonalCode(Integer.parseInt(extendedTextFieldPersonalCode.getText()))) {
-                        ErrorDialog.show(new IllegalArgumentException("Агент с таким кодом уже существует"));
+                    if (!ClientRecord.findClientWithParameter(Clients.CAR_NAME_ROW, extendedTextFieldClient.getText())) {
+                        ErrorDialog.show(new IllegalArgumentException("Такого клиента не существует"));
                         return;
                     }
 
-                    if(!checkPhoneNumber(extendedTextFieldTelephone.getText()))
+                    if (!BranchRecord.findBranchWithName(extendedTextFieldBranch.getText())) {
+                        ErrorDialog.show(new IllegalArgumentException("Такого филиала не существует"));
                         return;
+                    }
 
-                    RecordsWriter.addAgent(new AgentRecord(Agents.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(), extendedTextFieldSurname.getText(),
-                            extendedTextFieldAddress.getText(), extendedTextFieldTelephone.getText(), Integer.parseInt(extendedTextFieldPersonalCode.getText()), Double.parseDouble(extendedTextFieldPayments.getText())), SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY));
+                    if (!ServicesRecord.findServicesWithName(extendedTextFieldService.getText())) {
+                        ErrorDialog.show(new IllegalArgumentException("Такой услуги не существует"));
+                        return;
+                    }
+
+                    RecordsWriter.addMaintaining(new MaintainingRecord(Maintaining.TABLE_NAME, SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY), extendedTextFieldDate.getText(), extendedTextFieldClient.getText(),
+                            extendedTextFieldAuto.getText(), extendedTextFieldService.getText(), extendedTextFieldBranch.getText(), extendedTextFieldMechanic.getText()), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
                     closeStage();
                 }catch (Exception e){
                     ErrorDialog.show(e);
@@ -118,83 +130,144 @@ public class AddDataController {
         }
     }
 
-    private static double calculateMaintenanceAmount(double square, int peopleNumber, int roomsNumber){
-        return (square * ONE_QUAD_METER_COST) + (roomsNumber * ONE_ROOM_COST) + (peopleNumber * ONE_PEOPLE_COST);
-    }
-
-    public static void setMaintenanceAmountTextInTextField(@NotNull ExtendedTextField extendedTextFieldRoomsNumber, @NotNull ExtendedTextField extendedTextFieldPeopleNumber, @NotNull ExtendedTextField extendedTextFieldSquare, ExtendedTextField extendedTextFieldMaintenanceAmount){
-        if(!extendedTextFieldSquare.isEmpty() & !extendedTextFieldPeopleNumber.isEmpty() & !extendedTextFieldRoomsNumber.isEmpty())
-            extendedTextFieldMaintenanceAmount.setText(String.valueOf(calculateMaintenanceAmount(Double.parseDouble(extendedTextFieldSquare.getText()),
-                    Integer.parseInt(extendedTextFieldPeopleNumber.getText()), Integer.parseInt(extendedTextFieldRoomsNumber.getText()))));
-    }
-
-    private void loadCondolesComponents(){
-        try {
-            clearContentVBox();
-
-            ExtendedTextField extendedTextFieldNumber = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Номер квартиры", Utils.getImage("images/digits.png"));
-            ExtendedTextField extendedTextFieldOwnerName = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Имя владельца", Utils.getImage("images/user.png"));
-            ExtendedTextField extendedTextFieldRoomsNumber = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Количество комнат", Utils.getImage("images/digits.png"));
-            ExtendedTextField extendedTextFieldPeopleNumber = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Количество жильцов", Utils.getImage("images/digits.png"));
-            ExtendedTextField extendedTextFieldSquare = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Площадь (м^2)", Utils.getImage("images/square.png"));
-            ExtendedTextField extendedTextFieldMaintenanceAmount = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Сумма за содержание (руб.)", Utils.getImage("images/amount.png"));
-
-            extendedTextFieldNumber.setInputType(InputTypes.NUMERIC);
-            extendedTextFieldRoomsNumber.setInputType(InputTypes.NUMERIC);
-            extendedTextFieldPeopleNumber.setInputType(InputTypes.NUMERIC);
-            extendedTextFieldMaintenanceAmount.getTextField().setEditable(false);
-
-            extendedTextFieldRoomsNumber.setOnTextTyping(text -> setMaintenanceAmountTextInTextField(extendedTextFieldRoomsNumber, extendedTextFieldPeopleNumber, extendedTextFieldSquare, extendedTextFieldMaintenanceAmount));
-            extendedTextFieldSquare.setOnTextTyping(text -> setMaintenanceAmountTextInTextField(extendedTextFieldRoomsNumber, extendedTextFieldPeopleNumber, extendedTextFieldSquare, extendedTextFieldMaintenanceAmount));
-            extendedTextFieldPeopleNumber.setOnTextTyping(text -> setMaintenanceAmountTextInTextField(extendedTextFieldRoomsNumber, extendedTextFieldPeopleNumber, extendedTextFieldSquare, extendedTextFieldMaintenanceAmount));
-
-            contentVbox.getChildren().addAll(extendedTextFieldNumber, extendedTextFieldOwnerName, extendedTextFieldRoomsNumber, extendedTextFieldPeopleNumber, extendedTextFieldSquare, extendedTextFieldMaintenanceAmount);
-            nextButton.setOnAction(actionEvent -> {
-                try {
-                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldNumber, extendedTextFieldOwnerName, extendedTextFieldRoomsNumber, extendedTextFieldPeopleNumber, extendedTextFieldMaintenanceAmount, extendedTextFieldSquare});
-                    emptyFields.forEach(ExtendedTextField::setError);
-
-                    if (!emptyFields.isEmpty())
-                        return;
-
-                    if (CondolesRecord.findCondoleWithNumber(Integer.parseInt(extendedTextFieldNumber.getText()))) {
-                        ErrorDialog.show(new IllegalArgumentException("Квартира с таким номером уже существует"));
-                        return;
-                    }
-
-                    RecordsWriter.addCondole(new CondolesRecord(Condoles.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), Integer.parseInt(extendedTextFieldNumber.getText()),
-                            extendedTextFieldOwnerName.getText(), Integer.parseInt(extendedTextFieldPeopleNumber.getText()), Integer.parseInt(extendedTextFieldRoomsNumber.getText()), Double.parseDouble(extendedTextFieldMaintenanceAmount.getText()), Double.parseDouble(extendedTextFieldSquare.getText())), SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY));
-                    closeStage();
-                }catch (Exception e){
-                    ErrorDialog.show(e);
-                }
-            });
-        }catch (Exception e){
-            ErrorDialog.show(e);
-        }
-    }
-
-    private void loadServicesComponents(){
+    private void loadServicesComponents() {
         try {
             clearContentVBox();
 
             ExtendedTextField extendedTextFieldName = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Имя услуги", Utils.getImage("images/all_symbols.png"));
-            ExtendedTextField extendedTextFieldCondoleNumber = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Номер квартиры", Utils.getImage("images/digits.png"));
-            ExtendedTextField extendedTextFieldDate = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Дата услуги", Utils.getImage("images/all_symbols.png"));
+            ExtendedTextField extendedTextFieldDescription = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Описание", Utils.getImage("images/all_symbols.png"));
+            ExtendedTextField extendedTextFieldDuration = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Продолжительность", Utils.getImage("images/clock.png"));
+            ExtendedTextField extendedTextFieldCost = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Цена (руб.)", Utils.getImage("images/amount.png"));
 
-            extendedTextFieldCondoleNumber.setInputType(InputTypes.NUMERIC);
-
-            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldCondoleNumber, extendedTextFieldDate);
+            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldDescription, extendedTextFieldDuration, extendedTextFieldCost);
             nextButton.setOnAction(actionEvent -> {
                 try {
-                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldCondoleNumber, extendedTextFieldDate});
+                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldDescription, extendedTextFieldDuration, extendedTextFieldCost});
                     emptyFields.forEach(ExtendedTextField::setError);
 
                     if (!emptyFields.isEmpty())
                         return;
 
-                    RecordsWriter.addService(new ServicesRecord(Services.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(), extendedTextFieldDate.getText(),
-                            Integer.parseInt(extendedTextFieldCondoleNumber.getText())), SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY));
+                    if (ServicesRecord.findServicesWithName(extendedTextFieldName.getText())) {
+                        ErrorDialog.show(new IllegalArgumentException("Такой услуга уже существует"));
+                        return;
+                    }
+
+                    Double.parseDouble(extendedTextFieldCost.getText());
+
+                    RecordsWriter.addService(new ServicesRecord(Services.TABLE_NAME, SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(), extendedTextFieldDescription.getText(),
+                            extendedTextFieldDuration.getText(), Double.parseDouble(extendedTextFieldCost.getText())), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
+                    closeStage();
+                }catch (Exception e){
+                    ErrorDialog.show(e);
+                }
+            });
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+    }
+
+    private void loadClientsComponents() {
+        try {
+            clearContentVBox();
+
+            ExtendedTextField extendedTextFieldName = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Имя клиента", Utils.getImage("images/user.png"));
+            ExtendedTextField extendedTextFieldCarName = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Машина клиента", Utils.getImage("images/car.png"));
+            ExtendedTextField extendedTextFieldCarNumber = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Номер машины", Utils.getImage("images/car_number.png"));
+            ExtendedTextField extendedTextFieldContacts = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Контакты клиента", Utils.getImage("images/telephone.png"));
+
+            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldCarName, extendedTextFieldCarNumber, extendedTextFieldContacts);
+            nextButton.setOnAction(actionEvent -> {
+                try {
+                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName,  extendedTextFieldCarName, extendedTextFieldCarNumber, extendedTextFieldContacts});
+                    emptyFields.forEach(ExtendedTextField::setError);
+
+                    if (!emptyFields.isEmpty())
+                        return;
+
+                    if (ClientRecord.findClientWithParameter(Clients.NAME_ROW, extendedTextFieldCarName.getText())) {
+                        ErrorDialog.show(new IllegalArgumentException("Такой клиент уже существует"));
+                        return;
+                    }
+
+                    RecordsWriter.addClient(new ClientRecord(Clients.TABLE_NAME, SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(), extendedTextFieldContacts.getText(),
+                            extendedTextFieldCarName.getText(), extendedTextFieldCarNumber.getText()), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
+                    closeStage();
+                }catch (Exception e){
+                    ErrorDialog.show(e);
+                }
+            });
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+    }
+
+    private void loadBranchesComponents(){
+        try {
+            clearContentVBox();
+
+            ExtendedTextField extendedTextFieldName = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Название филиала", Utils.getImage("images/all_symbols.png"));
+            ExtendedTextField extendedTextFieldAddress = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Адрес", Utils.getImage("images/address.png"));
+            ExtendedTextField extendedTextFieldTelephone = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Телефон", Utils.getImage("images/telephone.png"));
+            ExtendedTextField extendedTextFieldWorkClocks = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Часы работы", Utils.getImage("images/clock.png"));
+            ExtendedTextField extendedTextFieldManager = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Менеджер", Utils.getImage("images/manager.png"));
+
+            contentVbox.getChildren().addAll(extendedTextFieldName,  extendedTextFieldAddress, extendedTextFieldTelephone, extendedTextFieldWorkClocks, extendedTextFieldManager);
+            nextButton.setOnAction(actionEvent -> {
+                try {
+                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName,  extendedTextFieldAddress, extendedTextFieldTelephone, extendedTextFieldWorkClocks, extendedTextFieldManager});
+                    emptyFields.forEach(ExtendedTextField::setError);
+
+                    if (!emptyFields.isEmpty())
+                        return;
+
+                    if(!Utils.checkPhoneNumber(extendedTextFieldTelephone.getText())){
+                        return;
+                    }
+
+                    if (BranchRecord.findBranchWithName(extendedTextFieldName.getText())) {
+                        ErrorDialog.show(new IllegalArgumentException("Такой филиал уже существует"));
+                        return;
+                    }
+
+                    RecordsWriter.addBranch(new BranchRecord(Branches.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(),
+                            extendedTextFieldAddress.getText(), extendedTextFieldTelephone.getText(), extendedTextFieldWorkClocks.getText(), extendedTextFieldManager.getText()), SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY));
+                    closeStage();
+                }catch (Exception e){
+                    ErrorDialog.show(e);
+                }
+            });
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+    }
+
+    private void loadStaffComponents(){
+        try {
+            clearContentVBox();
+
+            ExtendedTextField extendedTextFieldName = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Имя сотрудника", Utils.getImage("images/user.png"));
+            ExtendedTextField extendedTextFieldPost = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Должность", Utils.getImage("images/post.png"));
+            ExtendedTextField extendedTextFieldBranch = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Филиал", Utils.getImage("images/all_symbols.png"));
+            ExtendedTextField extendedTextFieldContacts = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Контакты", Utils.getImage("images/telephone.png"));
+            ExtendedTextField extendedTextFieldQualification = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Квалификация", Utils.getImage("images/qualification.png"));
+
+            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification);
+            nextButton.setOnAction(actionEvent -> {
+                try {
+                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification});
+                    emptyFields.forEach(ExtendedTextField::setError);
+
+                    if (!emptyFields.isEmpty())
+                        return;
+
+                    if(!BranchRecord.findBranchWithName(extendedTextFieldBranch.getText())) {
+                        ErrorDialog.show(new IllegalArgumentException("Такого филиала не существует"));
+                        return;
+                    }
+
+                    RecordsWriter.addStaff(new StaffRecord(Staff.TABLE_NAME, SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(), extendedTextFieldPost.getText(),
+                            extendedTextFieldBranch.getText(), extendedTextFieldContacts.getText(), extendedTextFieldQualification.getText()), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
                     closeStage();
                 }catch (Exception e){
                     ErrorDialog.show(e);

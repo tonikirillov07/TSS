@@ -1,25 +1,57 @@
-package com.ds.utilitiesapp.records;
+package com.ds.tss.records;
+
+import com.ds.tss.Constants;
+import com.ds.tss.database.DatabaseService;
+import com.ds.tss.database.tablesConstants.Branches;
+import com.ds.tss.database.tablesConstants.Services;
+import com.ds.tss.dialogs.ErrorDialog;
+import com.ds.tss.utils.settings.SettingsManager;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Objects;
 
 public class ServicesRecord extends Record{
-    private String name, date;
-    private int condoleNumber;
+    private String name, description, duration;
+    private double cost;
 
     public ServicesRecord(){
         super(null, null);
     }
 
-    public ServicesRecord(String tableName, String databasePath, String name, String date, int condoleNumber) {
+    public ServicesRecord(String tableName, String databasePath, String name, String description, String duration, double cost) {
         super(tableName, databasePath);
         this.name = name;
-        this.date = date;
-        this.condoleNumber = condoleNumber;
+        this.description = description;
+        this.duration = duration;
+        this.cost = cost;
     }
 
-    public ServicesRecord(String tableName, String databasePath, long id, String name, String date, int condoleNumber) {
+    public ServicesRecord(String tableName, String databasePath, long id, String name, String description, String duration, double cost) {
         super(tableName, databasePath, id);
         this.name = name;
-        this.date = date;
-        this.condoleNumber = condoleNumber;
+        this.description = description;
+        this.duration = duration;
+        this.cost = cost;
+    }
+
+    public static boolean findServicesWithName(String name){
+        try {
+            String select = "SELECT * FROM " + Services.TABLE_NAME + " WHERE " + Services.NAME_ROW + "='" + name + "'";
+            PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(select);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            boolean isThisServiceExists = resultSet.next();
+
+            resultSet.close();
+            preparedStatement.close();
+
+            return isThisServiceExists;
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+
+        return false;
     }
 
     public String getName() {
@@ -30,28 +62,27 @@ public class ServicesRecord extends Record{
         this.name = name;
     }
 
-    public String getDate() {
-        return date;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public int getCondoleNumber() {
-        return condoleNumber;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setCondoleNumber(int condoleNumber) {
-        this.condoleNumber = condoleNumber;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
-    @Override
-    public String toString() {
-        return "ServicesRecord{" +
-                "name='" + name + '\'' +
-                ", date='" + date + '\'' +
-                ", condoleNumber=" + condoleNumber +
-                '}';
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }

@@ -1,7 +1,9 @@
-package com.ds.utilitiesapp.utils;
+package com.ds.tss.utils;
 
 public enum RecordsTypes {
-    AGENT,
+    BRANCH,
+    STAFF,
     SERVICE,
-    CONDOLE
+    CLIENT,
+    MAINTAINING
 }
