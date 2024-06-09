@@ -2,9 +2,11 @@ package com.ds.tss.utils;
 
 import com.ds.tss.Constants;
 import com.ds.tss.Main;
+import com.ds.tss.controllers.EditDataController;
 import com.ds.tss.dialogs.ErrorDialog;
 import com.ds.tss.dialogs.InfoDialog;
 import com.ds.tss.extendsNodes.ExtendedTextField;
+import com.ds.tss.records.*;
 import com.ds.tss.utils.actionListeners.IOnAction;
 import com.ds.tss.utils.settings.SettingsManager;
 import javafx.scene.Node;
@@ -28,8 +30,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-
-import static com.ds.tss.Constants.ONE_DOLLAR;
 
 public final class Utils {
     public static void copyString(String string){
@@ -119,9 +119,6 @@ public final class Utils {
         }
     }
 
-    public static double convertRubToDollars(double rubsValue){
-        return rubsValue * ONE_DOLLAR;
-    }
     public static boolean checkPhoneNumber(@NotNull String phoneNumber){
         if(phoneNumber.length() < 10){
             ErrorDialog.show(new Exception("Введите корректный номер телефона. Длина телефона меньше 10"));
@@ -141,5 +138,49 @@ public final class Utils {
         }
 
         return true;
+    }
+
+    public static boolean paneHasObjectWithId(String id, @NotNull Pane pane){
+        boolean isFound = false;
+
+        for (Node child : pane.getChildren()) {
+            if(child.getId() != null) {
+                if (child.getId().equals(id)) {
+                    isFound = true;
+                    break;
+                }
+            }
+        }
+
+        return isFound;
+    }
+
+    public static @Nullable Node findNodeWithIdInPane(String id, @NotNull Pane pane){
+        if(!paneHasObjectWithId(id, pane))
+            return null;
+
+        for (Node child : pane.getChildren()) {
+            if(child.getId() != null) {
+                if (child.getId().equals(id))
+                    return child;
+            }
+        }
+
+        return null;
+    }
+
+    public static void openEditingScene(com.ds.tss.records.Record record, @NotNull RecordsTypes recordsTypes, IOnAction onClose){
+        EditDataController editDataController = (EditDataController) AnotherScenes.goToAnotherScene("edit-data-view.fxml", "Редактирование данных");
+
+        assert editDataController != null;
+        editDataController.setOnClose(onClose);
+
+        switch (recordsTypes){
+            case CLIENT -> editDataController.loadClient((ClientRecord) record);
+            case BRANCH -> editDataController.loadBranch((BranchRecord) record);
+            case SERVICE -> editDataController.loadService((ServicesRecord) record);
+            case STAFF -> editDataController.loadStaff((StaffRecord) record);
+            case MAINTAINING -> editDataController.loadMaintaining((MaintainingRecord) record);
+        }
     }
 }

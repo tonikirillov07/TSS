@@ -29,7 +29,7 @@ public class SettingsManager {
         try {
             properties.setProperty(key, newValue);
 
-            FileWriter fileOutputStream =new FileWriter(SETTINGS_PATH );
+            FileWriter fileOutputStream = new FileWriter(SETTINGS_PATH);
             properties.store(fileOutputStream, null);
             fileOutputStream.close();
         }catch (Exception e){

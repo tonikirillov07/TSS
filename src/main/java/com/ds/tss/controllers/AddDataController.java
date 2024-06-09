@@ -185,8 +185,13 @@ public class AddDataController {
                     if (!emptyFields.isEmpty())
                         return;
 
-                    if (ClientRecord.findClientWithParameter(Clients.NAME_ROW, extendedTextFieldCarName.getText())) {
+                    if (ClientRecord.findClientWithParameter(Clients.NAME_ROW, extendedTextFieldName.getText())) {
                         ErrorDialog.show(new IllegalArgumentException("Такой клиент уже существует"));
+                        return;
+                    }
+
+                    if(ClientRecord.findClientWithParameter(Clients.CAR_NUMBER_ROW, extendedTextFieldCarNumber.getText())){
+                        ErrorDialog.show(new IllegalArgumentException("Клиент с таким номером машины уже существует"));
                         return;
                     }
 
@@ -251,11 +256,12 @@ public class AddDataController {
             ExtendedTextField extendedTextFieldBranch = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Филиал", Utils.getImage("images/all_symbols.png"));
             ExtendedTextField extendedTextFieldContacts = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Контакты", Utils.getImage("images/telephone.png"));
             ExtendedTextField extendedTextFieldQualification = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Квалификация", Utils.getImage("images/qualification.png"));
+            ExtendedTextField extendedTextFieldSalary = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Зарплата (руб.)", Utils.getImage("images/payment.png"));
 
-            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification);
+            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification, extendedTextFieldSalary);
             nextButton.setOnAction(actionEvent -> {
                 try {
-                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification});
+                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification, extendedTextFieldSalary});
                     emptyFields.forEach(ExtendedTextField::setError);
 
                     if (!emptyFields.isEmpty())
@@ -266,8 +272,10 @@ public class AddDataController {
                         return;
                     }
 
+                    Double.parseDouble(extendedTextFieldSalary.getText());
+
                     RecordsWriter.addStaff(new StaffRecord(Staff.TABLE_NAME, SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(), extendedTextFieldPost.getText(),
-                            extendedTextFieldBranch.getText(), extendedTextFieldContacts.getText(), extendedTextFieldQualification.getText()), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
+                            extendedTextFieldBranch.getText(), extendedTextFieldContacts.getText(), extendedTextFieldQualification.getText(), Double.parseDouble(extendedTextFieldSalary.getText())), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
                     closeStage();
                 }catch (Exception e){
                     ErrorDialog.show(e);

@@ -2,23 +2,26 @@ package com.ds.tss.records;
 
 public class StaffRecord extends Record{
     private String name, post, branch, contacts, qualification;
+    private double salary;
 
-    public StaffRecord(String tableName, String databasePath, String name, String post, String branch, String contacts, String qualification) {
+    public StaffRecord(String tableName, String databasePath, String name, String post, String branch, String contacts, String qualification, double salary) {
         super(tableName, databasePath);
         this.name = name;
         this.post = post;
         this.branch = branch;
         this.contacts = contacts;
         this.qualification = qualification;
+        this.salary = salary;
     }
 
-    public StaffRecord(String tableName, String databasePath, long id, String name, String post, String branch, String contacts, String qualification) {
+    public StaffRecord(String tableName, String databasePath, long id, String name, String post, String branch, String contacts, String qualification, double salary) {
         super(tableName, databasePath, id);
         this.name = name;
         this.post = post;
         this.branch = branch;
         this.contacts = contacts;
         this.qualification = qualification;
+        this.salary = salary;
     }
 
     public String getName() {
@@ -59,5 +62,13 @@ public class StaffRecord extends Record{
 
     public void setQualification(String qualification) {
         this.qualification = qualification;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 }

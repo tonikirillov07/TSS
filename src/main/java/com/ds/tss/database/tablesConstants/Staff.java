@@ -7,4 +7,5 @@ public class Staff {
     public static final String BRANCH_ROW = "branch";
     public static final String CONTACTS_ROW = "contacts";
     public static final String QUALIFICATION_ROW = "qualification";
+    public static final String SALARY_ROW = "salary";
 }

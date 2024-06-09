@@ -185,24 +185,29 @@ public class EditDataController {
             ExtendedTextField extendedTextFieldBranch = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Филиал", Utils.getImage("images/all_symbols.png"));
             ExtendedTextField extendedTextFieldContacts = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Контакты", Utils.getImage("images/telephone.png"));
             ExtendedTextField extendedTextFieldQualification = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Квалификация", Utils.getImage("images/qualification.png"));
+            ExtendedTextField extendedTextFieldSalary = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Зарплата (руб.)", Utils.getImage("images/payment.png"));
 
             extendedTextFieldName.setText(staffRecord.getName());
             extendedTextFieldPost.setText(staffRecord.getPost());
             extendedTextFieldBranch.setText(staffRecord.getBranch());
             extendedTextFieldContacts.setText(staffRecord.getContacts());
             extendedTextFieldQualification.setText(staffRecord.getQualification());
+            extendedTextFieldSalary.setText(String.valueOf(staffRecord.getSalary()));
 
-            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldQualification, extendedTextFieldContacts);
+            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldQualification, extendedTextFieldContacts, extendedTextFieldSalary);
             buttonNext.setOnAction(actionEvent -> {
                 try {
-                    if (hasEmptyFields(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldQualification, extendedTextFieldBranch, extendedTextFieldContacts}))
+                    if (hasEmptyFields(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldQualification, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldSalary}))
                         return;
+
+                    Double.parseDouble(extendedTextFieldSalary.getText());
 
                     DatabaseService.changeValue(Staff.NAME_ROW, extendedTextFieldName.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.POST_ROW, extendedTextFieldPost.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.BRANCH_ROW, extendedTextFieldBranch.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.CONTACTS_ROW, extendedTextFieldContacts.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.QUALIFICATION_ROW, extendedTextFieldQualification.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
+                    DatabaseService.changeValue(Staff.SALARY_ROW, extendedTextFieldSalary.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
 
                     closeStage();
                 }catch (Exception e){

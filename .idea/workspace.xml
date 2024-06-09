@@ -4,52 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3fe8ea2b-7f04-4b8a-a8b4-3eef5ff83a23" name="Changes" comment="">
+    <list default="true" id="3fe8ea2b-7f04-4b8a-a8b4-3eef5ff83a23" name="Changes" comment="6/8/2024">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/FindClientController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/find-client-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/Constants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/MainPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/AddDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/AddDataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/ContactsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/ContactsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/EditDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/EditDataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/DatabaseConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/DatabaseConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/DatabaseService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/DatabaseService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Branches.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Branches.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Clients.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Clients.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Maintaining.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Maintaining.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Services.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Services.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/dialogs/ErrorDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/dialogs/ErrorDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/dialogs/InfoDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/dialogs/InfoDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/ExtendedTextField.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/ExtendedTextField.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/SettingsOption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/SettingsOption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/SettingsOptionButton.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/extendsNodes/SettingsOptionButton.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/BranchRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/BranchRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ClientRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ClientRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/MaintainingRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/MaintainingRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/Record.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/Record.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsWriter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ServicesRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ServicesRecord.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/StaffRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/StaffRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/AnotherScenes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/AnotherScenes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/InputTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/InputTypes.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/RecordsTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/RecordsTypes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/actionListeners/IOnAction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/actionListeners/IOnAction.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/actionListeners/IOnTextTyping.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/actionListeners/IOnTextTyping.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/settings/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/settings/SettingsManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/add-data-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/add-data-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/edit-data-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/edit-data-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/help-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/help-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/background.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/background.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/icon/window_icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/icon/window_icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/main-view.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temporary/temp.db" beforeDir="false" afterPath="$PROJECT_DIR$/temporary/temp.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,6 +30,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -67,18 +38,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "tonikirillov07"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;tonikirillov07&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/tonikirillov07/TSS.git",
-    "accountId": "27d0f378-e3fc-4a78-a3a2-0c7f3c837619"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/tonikirillov07/TSS.git&quot;,
+    &quot;accountId&quot;: &quot;27d0f378-e3fc-4a78-a3a2-0c7f3c837619&quot;
   }
-}]]></component>
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -97,21 +68,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/toniw/IdeaProjects/TSS/src/main/resources/com/ds/tss/images/icon&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.HelloApplication.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.Test.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/toniw/IdeaProjects/TSS/src/main/resources/com/ds/tss/images/icon",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\toniw\IdeaProjects\TSS\src\main\resources\com\ds\tss\images\icon" />
@@ -151,9 +123,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ds.tss.Test" />
+      <module name="TSS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ds.tss.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
+        <item itemvalue="Application.Test" />
         <item itemvalue="Application.HelloApplication" />
       </list>
     </recent_temporary>
@@ -167,9 +153,20 @@
       <option name="presentableId" value="Default" />
       <updated>1717843241869</updated>
     </task>
+    <task id="LOCAL-00001" summary="6/8/2024">
+      <option name="closed" value="true" />
+      <created>1717872555405</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1717872555405</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="6/8/2024" />
+    <option name="LAST_COMMIT_MESSAGE" value="6/8/2024" />
   </component>
 </project>

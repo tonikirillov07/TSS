@@ -1,14 +1,19 @@
 package com.ds.tss.records;
 
 import com.ds.tss.Constants;
+import com.ds.tss.database.DatabaseConstants;
 import com.ds.tss.database.DatabaseService;
 import com.ds.tss.database.tablesConstants.Clients;
 import com.ds.tss.dialogs.ErrorDialog;
 import com.ds.tss.utils.settings.SettingsManager;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Objects;
+
+import static com.ds.tss.Constants.CURRENT_DATABASE_FILE_KEY;
 
 public class ClientRecord extends Record {
     private String name, contacts, carName, carNumber;
@@ -36,7 +41,7 @@ public class ClientRecord extends Record {
     public static boolean findClientWithParameter(String row, String value){
         try {
             String select = "SELECT * FROM " + Clients.TABLE_NAME + " WHERE " + row + "='" + value + "'";
-            PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY))).prepareStatement(select);
+            PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY))).prepareStatement(select);
             ResultSet resultSet = preparedStatement.executeQuery();
 
             boolean isThisAgentExists = resultSet.next();
@@ -50,6 +55,26 @@ public class ClientRecord extends Record {
         }
 
         return false;
+    }
+
+    public static @Nullable ClientRecord findClientRecordWithParameter(String row, String value){
+        try {
+            String select = "SELECT * FROM " + Clients.TABLE_NAME + " WHERE " + row + "='" + value + "'";
+            PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY))).prepareStatement(select);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            ClientRecord clientRecord = new ClientRecord(resultSet.getLong(DatabaseConstants.ID_ROW), Clients.TABLE_NAME, SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY), resultSet.getString(Clients.NAME_ROW),
+                    resultSet.getString(Clients.CONTACTS_DATA_ROW), resultSet.getString(Clients.CAR_NAME_ROW), resultSet.getString(Clients.CAR_NUMBER_ROW));
+
+            resultSet.close();
+            preparedStatement.close();
+
+            return clientRecord;
+        }catch (Exception e){
+            ErrorDialog.show(e);
+        }
+
+        return null;
     }
 
     public String getName() {
@@ -82,5 +107,15 @@ public class ClientRecord extends Record {
 
     public void setCarNumber(String carNumber) {
         this.carNumber = carNumber;
+    }
+
+    @Override
+    public String toString() {
+        return "ClientRecord{" +
+                "name='" + name + '\'' +
+                ", contacts='" + contacts + '\'' +
+                ", carName='" + carName + '\'' +
+                ", carNumber='" + carNumber + '\'' +
+                '}';
     }
 }

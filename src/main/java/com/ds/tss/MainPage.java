@@ -7,6 +7,7 @@ import com.ds.tss.records.*;
 import com.ds.tss.utils.AnotherScenes;
 import com.ds.tss.utils.RecordsTypes;
 import com.ds.tss.utils.Utils;
+import com.ds.tss.utils.actionListeners.IOnAction;
 import com.ds.tss.utils.settings.SettingsManager;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -120,15 +121,18 @@ public class MainPage {
             TableColumn<StaffRecord, String> staffRecordQualificationTableColumn = new TableColumn<>("Квалификация");
             staffRecordQualificationTableColumn.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getQualification()));
 
+            TableColumn<StaffRecord, Double> staffRecordSalaryTableColumn = new TableColumn<>("Зарплата (руб.)");
+            staffRecordSalaryTableColumn.setCellValueFactory(cellData -> new SimpleDoubleProperty(cellData.getValue().getSalary()).asObject());
+
             tableView.getColumns().addAll(staffRecordIdTableColumn, staffRecordNameTableColumn, staffRecordPostTableColumn, staffRecordBranchTableColumn,
-                    staffRecordContactsTableColumn, staffRecordQualificationTableColumn);
+                    staffRecordContactsTableColumn, staffRecordQualificationTableColumn, staffRecordSalaryTableColumn);
             tableView.setOnMouseClicked(mouseEvent -> {
                 int cellIndex = getSelectedRowIndexFromTableView(tableView);
                 if(cellIndex < 0)
                     return;
 
                 StaffRecord servicesRecord = tableView.getItems().get(cellIndex);
-                openEditingScene(servicesRecord, RecordsTypes.STAFF);
+                openEditingScene(servicesRecord, RecordsTypes.STAFF, this::update);
             });
             tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllStaffsRecords()));
         }catch (Exception e){
@@ -172,7 +176,7 @@ public class MainPage {
                     return;
 
                 MaintainingRecord servicesRecord = tableView.getItems().get(cellIndex);
-                openEditingScene(servicesRecord, RecordsTypes.MAINTAINING);
+                openEditingScene(servicesRecord, RecordsTypes.MAINTAINING, this::update);
             });
             tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllMaintainingRecords()));
         }catch (Exception e){
@@ -224,7 +228,7 @@ public class MainPage {
                     return;
 
                 ServicesRecord servicesRecord = tableView.getItems().get(cellIndex);
-                openEditingScene(servicesRecord, RecordsTypes.SERVICE);
+                openEditingScene(servicesRecord, RecordsTypes.SERVICE, this::update);
             });
             tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllServicesRecords()));
         }catch (Exception e){
@@ -265,7 +269,7 @@ public class MainPage {
                     return;
 
                 BranchRecord data = tableView.getItems().get(cellIndex);
-                openEditingScene(data, RecordsTypes.BRANCH);
+                openEditingScene(data, RecordsTypes.BRANCH, this::update);
             });
 
             tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllBranchesRecords()));
@@ -274,7 +278,7 @@ public class MainPage {
         }
     }
 
-    private int getSelectedRowIndexFromTableView(@NotNull TableView tableView){
+    public static int getSelectedRowIndexFromTableView(@NotNull TableView tableView){
         try {
             ObservableList tablePositionObservableList = tableView.getSelectionModel().getSelectedCells();
             if (tablePositionObservableList.isEmpty())
@@ -318,7 +322,7 @@ public class MainPage {
                     return;
 
                 ClientRecord condolesRecord = tableView.getItems().get(cellIndex);
-                openEditingScene(condolesRecord, RecordsTypes.CLIENT);
+                openEditingScene(condolesRecord, RecordsTypes.CLIENT, this::update);
             });
             tableView.getItems().addAll(Objects.requireNonNull(RecordsGetter.getAllClientsRecords()));
         }catch (Exception e){
@@ -357,12 +361,20 @@ public class MainPage {
     private void initMenuData(@NotNull Menu menuData){
         try {
             MenuItem menuItemAdd = new MenuItem("Добавить");
+            MenuItem menuItemFindClient = new MenuItem("Найти клиента");
+
+            menuItemFindClient.setOnAction(actionEvent ->{
+                AnotherScenes.goToAnotherScene("find-client-view.fxml", "Поиск клиента");
+            });
+
             menuItemAdd.setOnAction(actionEvent -> {
                 AddDataController addDataController = (AddDataController) AnotherScenes.goToAnotherScene("add-data-view.fxml", "Добавить запись");
+
+                assert addDataController != null;
                 addDataController.setOnClose(this::update);
             });
 
-            menuData.getItems().addAll(menuItemAdd);
+            menuData.getItems().addAll(menuItemAdd, menuItemFindClient);
         }catch (Exception e){
             ErrorDialog.show(e);
         }
@@ -406,21 +418,6 @@ public class MainPage {
         File selectedFile = openSaveDialog("Выберет файл для сохранения", getStage(), List.of(new FileChooser.ExtensionFilter("База данных", "*.db*")));
         if(selectedFile != null){
             Utils.saveCurrentFile(selectedFile.getAbsolutePath());
-        }
-    }
-
-    private void openEditingScene(com.ds.tss.records.Record record, @NotNull RecordsTypes recordsTypes){
-        EditDataController editDataController = (EditDataController) AnotherScenes.goToAnotherScene("edit-data-view.fxml", "Редактирование данных");
-
-        assert editDataController != null;
-        editDataController.setOnClose(this::update);
-
-        switch (recordsTypes){
-            case CLIENT -> editDataController.loadClient((ClientRecord) record);
-            case BRANCH -> editDataController.loadBranch((BranchRecord) record);
-            case SERVICE -> editDataController.loadService((ServicesRecord) record);
-            case STAFF -> editDataController.loadStaff((StaffRecord) record);
-            case MAINTAINING -> editDataController.loadMaintaining((MaintainingRecord) record);
         }
     }
 
