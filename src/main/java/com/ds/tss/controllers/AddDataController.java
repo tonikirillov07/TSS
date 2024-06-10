@@ -6,7 +6,6 @@ import com.ds.tss.database.tablesConstants.*;
 import com.ds.tss.dialogs.ErrorDialog;
 import com.ds.tss.extendsNodes.ExtendedTextField;
 import com.ds.tss.records.*;
-import com.ds.tss.utils.InputTypes;
 import com.ds.tss.utils.Utils;
 import com.ds.tss.utils.actionListeners.IOnAction;
 import com.ds.tss.utils.settings.SettingsManager;
@@ -17,7 +16,6 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
