@@ -5,21 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fe8ea2b-7f04-4b8a-a8b4-3eef5ff83a23" name="Changes" comment="6/8/2024">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/FindClientController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/find-client-view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/MainPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/MainPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/AddDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/AddDataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/EditDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/EditDataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Staff.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ClientRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ClientRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsGetter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/StaffRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/StaffRecord.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/Utils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/settings/SettingsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/utils/settings/SettingsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/ContactsController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ServicesRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/ServicesRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/help-view.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/styles.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temporary/temp.db" beforeDir="false" afterPath="$PROJECT_DIR$/temporary/temp.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -68,22 +60,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Application.HelloApplication.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.Test.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/toniw/IdeaProjects/TSS/src/main/resources/com/ds/tss/images/icon",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Application.HelloApplication.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Test.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/toniw/IdeaProjects/TSS/src/main/resources/com/ds/tss/images/icon&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\toniw\IdeaProjects\TSS\src\main\resources\com\ds\tss\images\icon" />
@@ -161,7 +153,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717872555405</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="6/8/2024">
+      <option name="closed" value="true" />
+      <created>1717922326568</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1717922326568</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

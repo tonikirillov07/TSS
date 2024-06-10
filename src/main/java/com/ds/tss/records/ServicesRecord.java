@@ -2,7 +2,6 @@ package com.ds.tss.records;
 
 import com.ds.tss.Constants;
 import com.ds.tss.database.DatabaseService;
-import com.ds.tss.database.tablesConstants.Branches;
 import com.ds.tss.database.tablesConstants.Services;
 import com.ds.tss.dialogs.ErrorDialog;
 import com.ds.tss.utils.settings.SettingsManager;
