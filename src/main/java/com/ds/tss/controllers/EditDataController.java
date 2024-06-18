@@ -185,29 +185,42 @@ public class EditDataController {
             ExtendedTextField extendedTextFieldBranch = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Филиал", Utils.getImage("images/all_symbols.png"));
             ExtendedTextField extendedTextFieldContacts = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Контакты", Utils.getImage("images/telephone.png"));
             ExtendedTextField extendedTextFieldQualification = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Квалификация", Utils.getImage("images/qualification.png"));
-            ExtendedTextField extendedTextFieldSalary = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Зарплата (руб.)", Utils.getImage("images/payment.png"));
+
+            ExtendedTextField extendedTextFieldWorkedTime = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Отработанное время (часы)", Utils.getImage("images/clock.png"));
+            ExtendedTextField extendedTextFieldPassedWorks = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Количество выполненных работ", Utils.getImage("images/work.png"));
+            ExtendedTextField extendedTextFieldAwards = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Премии (mtl)", Utils.getImage("images/awards.png"));
 
             extendedTextFieldName.setText(staffRecord.getName());
             extendedTextFieldPost.setText(staffRecord.getPost());
             extendedTextFieldBranch.setText(staffRecord.getBranch());
             extendedTextFieldContacts.setText(staffRecord.getContacts());
             extendedTextFieldQualification.setText(staffRecord.getQualification());
-            extendedTextFieldSalary.setText(String.valueOf(staffRecord.getSalary()));
 
-            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldQualification, extendedTextFieldContacts, extendedTextFieldSalary);
+            extendedTextFieldAwards.setText(String.valueOf(staffRecord.getAwards()));
+            extendedTextFieldPassedWorks.setText(String.valueOf(staffRecord.getPassedWorks()));
+            extendedTextFieldWorkedTime.setText(String.valueOf(staffRecord.getWorkedTime()));
+
+            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldQualification, extendedTextFieldContacts, extendedTextFieldWorkedTime,
+                    extendedTextFieldPassedWorks, extendedTextFieldAwards);
             buttonNext.setOnAction(actionEvent -> {
                 try {
-                    if (hasEmptyFields(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldQualification, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldSalary}))
+                    if (hasEmptyFields(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldQualification, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldWorkedTime,
+                            extendedTextFieldPassedWorks, extendedTextFieldAwards}))
                         return;
 
-                    Double.parseDouble(extendedTextFieldSalary.getText());
+                    double workedTime = Double.parseDouble(extendedTextFieldWorkedTime.getText());
+                    double awards = Double.parseDouble(extendedTextFieldAwards.getText());
+                    int passedWorks = Integer.parseInt(extendedTextFieldPassedWorks.getText());
 
                     DatabaseService.changeValue(Staff.NAME_ROW, extendedTextFieldName.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.POST_ROW, extendedTextFieldPost.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.BRANCH_ROW, extendedTextFieldBranch.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.CONTACTS_ROW, extendedTextFieldContacts.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
                     DatabaseService.changeValue(Staff.QUALIFICATION_ROW, extendedTextFieldQualification.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
-                    DatabaseService.changeValue(Staff.SALARY_ROW, extendedTextFieldSalary.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
+                    DatabaseService.changeValue(Staff.WORKED_TIME_ROW, extendedTextFieldWorkedTime.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
+                    DatabaseService.changeValue(Staff.PASSED_WORKS, extendedTextFieldPassedWorks.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
+                    DatabaseService.changeValue(Staff.AWARDS_ROW, extendedTextFieldAwards.getText(), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
+                    DatabaseService.changeValue(Staff.SALARY_ROW, String.valueOf(StaffRecord.calculateSalary(workedTime, awards, passedWorks)), staffRecord.getId(), Staff.TABLE_NAME, staffRecord.getDatabasePath());
 
                     closeStage();
                 }catch (Exception e){

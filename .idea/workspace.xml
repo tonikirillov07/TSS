@@ -5,8 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fe8ea2b-7f04-4b8a-a8b4-3eef5ff83a23" name="Changes" comment="6/8/2024">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/awards.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/work.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/AddDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/AddDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/EditDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/controllers/EditDataController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Staff.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/database/tablesConstants/Staff.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsGetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsGetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/RecordsWriter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/StaffRecord.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/ds/tss/records/StaffRecord.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/mechanic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/ds/tss/images/service.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/temporary/temp.db" beforeDir="false" afterPath="$PROJECT_DIR$/temporary/temp.db" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -65,7 +75,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/toniw/IdeaProjects/TSS/src/main/resources/com/ds/tss/images/icon&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/toniw/IdeaProjects/TSS/libs/sqlite-jdbc-3.40.0.0.jar&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;
@@ -164,7 +174,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718012008283</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="6/8/2024">
+      <option name="closed" value="true" />
+      <created>1718012647420</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1718012647420</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">

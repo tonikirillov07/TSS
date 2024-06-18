@@ -8,4 +8,7 @@ public class Staff {
     public static final String CONTACTS_ROW = "contacts";
     public static final String QUALIFICATION_ROW = "qualification";
     public static final String SALARY_ROW = "salary";
+    public static final String WORKED_TIME_ROW = "worked_time";
+    public static final String AWARDS_ROW = "awards";
+    public static final String PASSED_WORKS = "passed_works";
 }

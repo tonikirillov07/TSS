@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 import java.util.List;
 
 import static com.ds.tss.Constants.*;
+import static com.ds.tss.records.StaffRecord.calculateSalary;
 import static com.ds.tss.utils.Utils.defaultCategoryMenuItemsAction;
 
 public class AddDataController {
@@ -254,12 +255,17 @@ public class AddDataController {
             ExtendedTextField extendedTextFieldBranch = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Филиал", Utils.getImage("images/all_symbols.png"));
             ExtendedTextField extendedTextFieldContacts = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Контакты", Utils.getImage("images/telephone.png"));
             ExtendedTextField extendedTextFieldQualification = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Квалификация", Utils.getImage("images/qualification.png"));
-            ExtendedTextField extendedTextFieldSalary = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Зарплата (руб.)", Utils.getImage("images/payments.png"));
 
-            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification, extendedTextFieldSalary);
+            ExtendedTextField extendedTextFieldWorkedTime = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Отработанное время (часы)", Utils.getImage("images/clock.png"));
+            ExtendedTextField extendedTextFieldPassedWorks = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Количество выполненных работ", Utils.getImage("images/work.png"));
+            ExtendedTextField extendedTextFieldAwards = new ExtendedTextField(ExtendedTextField.DEFAULT_WIDTH, ExtendedTextField.DEFAULT_HEIGHT, "Премии (mtl)", Utils.getImage("images/awards.png"));
+
+            contentVbox.getChildren().addAll(extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification, extendedTextFieldWorkedTime,
+                    extendedTextFieldPassedWorks, extendedTextFieldAwards);
             nextButton.setOnAction(actionEvent -> {
                 try {
-                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification, extendedTextFieldSalary});
+                    List<ExtendedTextField> emptyFields = Utils.getEmptyFieldsFromArray(new ExtendedTextField[]{extendedTextFieldName, extendedTextFieldPost, extendedTextFieldBranch, extendedTextFieldContacts, extendedTextFieldQualification, extendedTextFieldWorkedTime,
+                            extendedTextFieldPassedWorks, extendedTextFieldAwards});
                     emptyFields.forEach(ExtendedTextField::setError);
 
                     if (!emptyFields.isEmpty())
@@ -270,10 +276,12 @@ public class AddDataController {
                         return;
                     }
 
-                    Double.parseDouble(extendedTextFieldSalary.getText());
+                    Double.parseDouble(extendedTextFieldWorkedTime.getText());
+                    Integer.parseInt(extendedTextFieldPassedWorks.getText());
+                    Double.parseDouble(extendedTextFieldAwards.getText());
 
                     RecordsWriter.addStaff(new StaffRecord(Staff.TABLE_NAME, SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY), extendedTextFieldName.getText(), extendedTextFieldPost.getText(),
-                            extendedTextFieldBranch.getText(), extendedTextFieldContacts.getText(), extendedTextFieldQualification.getText(), Double.parseDouble(extendedTextFieldSalary.getText())), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
+                            extendedTextFieldBranch.getText(), extendedTextFieldContacts.getText(), extendedTextFieldQualification.getText(), Double.parseDouble(extendedTextFieldWorkedTime.getText()), Double.parseDouble(extendedTextFieldAwards.getText()), Integer.parseInt(extendedTextFieldPassedWorks.getText()), calculateSalary(Double.parseDouble(extendedTextFieldWorkedTime.getText()), Double.parseDouble(extendedTextFieldAwards.getText()), Integer.parseInt(extendedTextFieldPassedWorks.getText()))), SettingsManager.getValue(CURRENT_DATABASE_FILE_KEY));
                     closeStage();
                 }catch (Exception e){
                     ErrorDialog.show(e);

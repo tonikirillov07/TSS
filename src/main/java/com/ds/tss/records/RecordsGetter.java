@@ -111,7 +111,7 @@ public class RecordsGetter {
             List<StaffRecord> maintainingRecords = new ArrayList<>();
             while (resultSet.next()){
                 maintainingRecords.add(new StaffRecord(Staff.TABLE_NAME, SettingsManager.getValue(Constants.CURRENT_DATABASE_FILE_KEY), resultSet.getLong(ID_ROW), resultSet.getString(Staff.NAME_ROW), resultSet.getString(Staff.POST_ROW),
-                        resultSet.getString(Staff.BRANCH_ROW), resultSet.getString(Staff.CONTACTS_ROW), resultSet.getString(Staff.QUALIFICATION_ROW), resultSet.getDouble(Staff.SALARY_ROW)));
+                        resultSet.getString(Staff.BRANCH_ROW), resultSet.getString(Staff.CONTACTS_ROW), resultSet.getString(Staff.QUALIFICATION_ROW), resultSet.getDouble(Staff.WORKED_TIME_ROW), resultSet.getDouble(Staff.AWARDS_ROW), resultSet.getInt(Staff.PASSED_WORKS), resultSet.getDouble(Staff.SALARY_ROW)));
             }
 
             return maintainingRecords;

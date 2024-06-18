@@ -77,13 +77,17 @@ public class RecordsWriter {
 
     public static void addStaff(StaffRecord staffRecord, String databasePath){
         try{
-            String add = "INSERT INTO " + Staff.TABLE_NAME + "(" + Staff.NAME_ROW + "," + Staff.POST_ROW + "," + Staff.BRANCH_ROW + "," + Staff.CONTACTS_ROW + "," + Staff.QUALIFICATION_ROW + ") VALUES(?,?,?,?,?)";
+            String add = "INSERT INTO " + Staff.TABLE_NAME + "(" + Staff.NAME_ROW + "," + Staff.POST_ROW + "," + Staff.BRANCH_ROW + "," + Staff.CONTACTS_ROW + "," + Staff.QUALIFICATION_ROW + ", " + Staff.WORKED_TIME_ROW + "," + Staff.AWARDS_ROW + "," + Staff.PASSED_WORKS + ", " + Staff.SALARY_ROW + ") VALUES(?,?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = Objects.requireNonNull(DatabaseService.getConnection(databasePath)).prepareStatement(add);
             preparedStatement.setString(1, staffRecord.getName());
             preparedStatement.setString(2, staffRecord.getPost());
             preparedStatement.setString(3, staffRecord.getBranch());
             preparedStatement.setString(4, staffRecord.getContacts());
             preparedStatement.setString(5, staffRecord.getQualification());
+            preparedStatement.setDouble(6, staffRecord.getWorkedTime());
+            preparedStatement.setDouble(7, staffRecord.getAwards());
+            preparedStatement.setInt(8, staffRecord.getPassedWorks());
+            preparedStatement.setDouble(9, staffRecord.getSalary());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
